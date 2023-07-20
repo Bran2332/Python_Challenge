@@ -54,7 +54,7 @@ print("Greatest Increase in Profits: ", greatest_inc_profit[0], "$", greatest_in
 print("Greatest Decrease in Profits: ", greatest_dec_profit[0], "$", greatest_dec_profit[1])
 
 #save the output file path
-output_file = os.path.join("PyBank_Analysis.csv")
+output_file = os.path.join("analysis", "PyBank_Analysis_results.csv")
 
 # open the output file, create the rows with the results and then export a csv file.
 with open(output_file, "w", newline='') as datafile:
