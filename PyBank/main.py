@@ -46,6 +46,7 @@ with open(budget_csv) as csvfile:
             greatest_dec_profit[0] = row[0]
             greatest_dec_profit[1] = net_change
 
+#print results through terminal
 
 print("Total Months : " , total_months)
 print("Total Profit : ", "$" + (str(profit)))
