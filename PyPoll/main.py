@@ -3,14 +3,12 @@ import csv
 
 election_csv = os.path.join("Resources", "election_data.csv")
 
-#Lists
 
 candidates = []
-
-vote_counter = {}
-
+candidate_votes = {}
 total_votes = 0 
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 with open(election_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csv_reader)
@@ -18,41 +16,39 @@ with open(election_csv) as csvfile:
     for row in csv_reader:
         #count total amount of votes
         total_votes += 1 
-        candidate_names = row[2]  
+        current_candidate = row[2] 
+         
 
         #looks through row 2 and adds names to empty list, avoiding duplicates
-        if candidate_names not in candidates:
-            candidates.append(candidate_names)
+        if current_candidate not in candidates:
+            candidates.append(current_candidate)
+            candidate_votes[current_candidate] = 0 
 
-            vote_counter[candidate_names] = 0 
-
-        vote_counter[candidate_names] += 1  
-
-
-print(vote_counter)
-                      
-
-
-
+        candidate_votes[current_candidate] += 1 
         
+  
 
-        
-        
-        
+percentage_of_votes_Charles = candidate_votes["Charles Casper Stockham"] / total_votes * 100
+percentage_of_votes_Diana = candidate_votes["Diana DeGette"] / total_votes * 100
+percentage_of_votes_Raymon = candidate_votes["Raymon Anthony Doane"] / total_votes * 100
 
-#The percentage of votes each candidate won
-
-#The total number of votes each candidate won
 
 #The winner of the election based on popular vote
 
-                        
-
-
-
 print("Election Results")
-print("---------------------")
-
+print("---------------------------------------")
+# Total number of votes
 print("Total number of votes: ", total_votes)
+print("---------------------------------------")
+# The total number of votes each candidate won
+print(candidate_votes)
+print("Charles", percentage_of_votes_Charles, "%")
+print("Diane",percentage_of_votes_Diana, "%")
+print("Raymon",percentage_of_votes_Raymon, "%")
 
+#save the output file path
+output_file = os.path.join("analysis", "PyPoll_Analysis_results.csv")
 
+# open the output file, create the rows with the results and then export a csv file.
+with open(output_file, "w", newline='') as datafile:
+    writer = csv.writer(datafile)
